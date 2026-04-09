@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../notifications/presentation/notification_page.dart';
 import '../../settings/presentation/settings_page.dart';
 import '../../placeholder/presentation/placeholder_page.dart';
 import '../../../shared/presentation/widgets/custom_bottom_bar.dart';
@@ -143,14 +144,16 @@ class _ProfilePageState extends State<ProfilePage> {
               );
               break;
             case 1:
-            case 2:
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (_) => PlaceholderPage(
-                    tabIndex: index,
-                    title: index == 1 ? 'Calendar' : 'My Packages',
-                  ),
+                  builder: (_) =>
+                      const PlaceholderPage(tabIndex: 1, title: 'Calendar'),
                 ),
+              );
+              break;
+            case 2:
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const NotificationPage()),
               );
               break;
           }
@@ -253,7 +256,7 @@ class _ProfileTextField extends StatelessWidget {
     const borderRadius = 12.0;
     const greyBorder = Color(0xFFD5D5D5);
     const focused = Color(0xFF384569);
-    
+
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
@@ -288,10 +291,7 @@ class _ProfileTextField extends StatelessWidget {
           borderSide: const BorderSide(color: focused, width: 1.4),
         ),
       ),
-      style: GoogleFonts.openSans(
-        fontSize: 14,
-        color: Colors.black87,
-      ),
+      style: GoogleFonts.openSans(fontSize: 14, color: Colors.black87),
       cursorColor: focused,
     );
   }

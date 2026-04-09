@@ -18,14 +18,14 @@ class CustomBottomBar extends StatelessWidget {
   static const List<IconData> _icons = <IconData>[
     Icons.home_outlined,
     Icons.calendar_today_outlined,
-    Icons.add_box_outlined,
+    Icons.notifications_none_rounded,
     Icons.person_outline,
   ];
 
   static const List<String> _labels = <String>[
     'Home',
     'Calendar',
-    'Add',
+    'Notification',
     'Profile',
   ];
 
@@ -56,15 +56,11 @@ class CustomBottomBar extends StatelessWidget {
                   ),
                   child: Container(
                     height: _barHeight,
-                    decoration: const BoxDecoration(
-                      color: _barColor,
-                    ),
+                    decoration: const BoxDecoration(color: _barColor),
                     child: Row(
                       children: List.generate(
                         _icons.length,
-                        (index) => Expanded(
-                          child: _buildBarItem(index),
-                        ),
+                        (index) => Expanded(child: _buildBarItem(index)),
                       ),
                     ),
                   ),
@@ -73,7 +69,7 @@ class CustomBottomBar extends StatelessWidget {
 
               // الأيكون المختارة تطلع فوق وتاخد شكل البروفايل + الاسم تحتها
               Positioned(
-                top:1, // يخلي الدائرة طالعة فوق البار شوية
+                top: 1, // يخلي الدائرة طالعة فوق البار شوية
                 left: circleLeft,
                 child: _buildFloatingSelectedItem(),
               ),
@@ -121,23 +117,16 @@ class CustomBottomBar extends StatelessWidget {
             decoration: BoxDecoration(
               color: _barColor,
               shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.white,
-                width: 4,
-              ),
+              border: Border.all(color: Colors.white, width: 4),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha:  0.18),
+                  color: Colors.black.withValues(alpha: 0.18),
                   blurRadius: 10,
                   offset: const Offset(0, 3),
                 ),
               ],
             ),
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 30,
-            ),
+            child: Icon(icon, color: Colors.white, size: 30),
           ),
           const SizedBox(height: 4),
           Text(
@@ -158,10 +147,7 @@ class BottomBarClipper extends CustomClipper<Path> {
   final int selectedIndex;
   final int itemCount;
 
-  BottomBarClipper({
-    required this.selectedIndex,
-    required this.itemCount,
-  });
+  BottomBarClipper({required this.selectedIndex, required this.itemCount});
 
   @override
   Path getClip(Size size) {
@@ -190,22 +176,12 @@ class BottomBarClipper extends CustomClipper<Path> {
     final double controlPoint1Y = 0;
     final double dipX = centerX;
     final double dipY = notchRadius * 0.7; // عمق النوتش
-    path.quadraticBezierTo(
-      controlPoint1X,
-      controlPoint1Y,
-      dipX,
-      dipY,
-    );
+    path.quadraticBezierTo(controlPoint1X, controlPoint1Y, dipX, dipY);
 
     // الكيرف الثاني: يطلع تاني لفوق بشكل متماثل (تكملة القوس)
     final double controlPoint2X = centerX + notchRadius * 0.6;
     final double controlPoint2Y = dipY;
-    path.quadraticBezierTo(
-      controlPoint2X,
-      controlPoint2Y,
-      notchEndX,
-      0,
-    );
+    path.quadraticBezierTo(controlPoint2X, controlPoint2Y, notchEndX, 0);
 
     // تكملة خط مستقيم لحد الركن اليمين
     path.lineTo(size.width, 0);

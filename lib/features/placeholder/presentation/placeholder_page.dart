@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../notifications/presentation/notification_page.dart';
 import '../../profile/presentation/profile_page.dart';
 import '../../../shared/presentation/widgets/custom_bottom_bar.dart';
 
@@ -23,29 +24,26 @@ class PlaceholderPage extends StatelessWidget {
         // Home icon => open placeholder "Home" screen
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (_) => const PlaceholderPage(
-              tabIndex: 0,
-              title: 'Home',
-            ),
+            builder: (_) => const PlaceholderPage(tabIndex: 0, title: 'Home'),
           ),
         );
         break;
       case 1:
-      case 2:
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (_) => PlaceholderPage(
-              tabIndex: index,
-              title: index == 1 ? 'Calendar' : 'My Packages',
-            ),
+            builder: (_) =>
+                const PlaceholderPage(tabIndex: 1, title: 'Calendar'),
           ),
+        );
+        break;
+      case 2:
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const NotificationPage()),
         );
         break;
       case 3:
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (_) => const ProfilePage(),
-          ),
+          MaterialPageRoute(builder: (_) => const ProfilePage()),
         );
         break;
     }
@@ -63,19 +61,13 @@ class PlaceholderPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           title,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
       ),
       body: const Center(
         child: Text(
           'Placeholder Screen',
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.black54,
-          ),
+          style: TextStyle(fontSize: 18, color: Colors.black54),
         ),
       ),
       bottomNavigationBar: CustomBottomBar(

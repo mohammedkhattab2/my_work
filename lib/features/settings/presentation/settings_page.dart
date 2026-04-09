@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../notifications/presentation/notification_page.dart';
 import '../../profile/presentation/profile_page.dart';
 import '../../placeholder/presentation/placeholder_page.dart';
 import '../../../shared/presentation/widgets/custom_bottom_bar.dart';
@@ -11,42 +12,15 @@ class SettingsPage extends StatelessWidget {
   static const Color _textColor = Colors.black;
 
   static const List<_SettingsItem> _settingsItems = [
-    _SettingsItem(
-      icon: Icons.assignment_outlined,
-      title: 'My Orders',
-    ),
-    _SettingsItem(
-      icon: Icons.open_in_new_outlined,
-      title: 'Edit Profile',
-    ),
-    _SettingsItem(
-      icon: Icons.language_outlined,
-      title: 'Language',
-    ),
-    _SettingsItem(
-      icon: Icons.payment,
-      title: 'Payment Method',
-    ),
-    _SettingsItem(
-      icon: Icons.location_on_outlined,
-      title: 'My Address',
-    ),
-    _SettingsItem(
-      icon: Icons.notifications_none,
-      title: 'Notifications',
-    ),
-    _SettingsItem(
-      icon: Icons.help_outline,
-      title: 'Help Center',
-    ),
-    _SettingsItem(
-      icon: Icons.lock_outline,
-      title: 'Privacy Policy',
-    ),
-    _SettingsItem(
-      icon: Icons.logout,
-      title: 'Log Out',
-    ),
+    _SettingsItem(icon: Icons.assignment_outlined, title: 'My Orders'),
+    _SettingsItem(icon: Icons.open_in_new_outlined, title: 'Edit Profile'),
+    _SettingsItem(icon: Icons.language_outlined, title: 'Language'),
+    _SettingsItem(icon: Icons.payment, title: 'Payment Method'),
+    _SettingsItem(icon: Icons.location_on_outlined, title: 'My Address'),
+    _SettingsItem(icon: Icons.notifications_none, title: 'Notifications'),
+    _SettingsItem(icon: Icons.help_outline, title: 'Help Center'),
+    _SettingsItem(icon: Icons.lock_outline, title: 'Privacy Policy'),
+    _SettingsItem(icon: Icons.logout, title: 'Log Out'),
   ];
 
   @override
@@ -81,9 +55,7 @@ class SettingsPage extends StatelessWidget {
           if (index == 3) {
             // Already on Profile-related screen (Settings), go back to Profile
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (_) => const ProfilePage(),
-              ),
+              MaterialPageRoute(builder: (_) => const ProfilePage()),
             );
             return;
           }
@@ -93,22 +65,22 @@ class SettingsPage extends StatelessWidget {
               // Home icon opens placeholder "Home" screen
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (_) => const PlaceholderPage(
-                    tabIndex: 0,
-                    title: 'Home',
-                  ),
+                  builder: (_) =>
+                      const PlaceholderPage(tabIndex: 0, title: 'Home'),
                 ),
               );
               break;
             case 1:
-            case 2:
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (_) => PlaceholderPage(
-                    tabIndex: index,
-                    title: index == 1 ? 'Calendar' : 'My Packages',
-                  ),
+                  builder: (_) =>
+                      const PlaceholderPage(tabIndex: 1, title: 'Calendar'),
                 ),
+              );
+              break;
+            case 2:
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const NotificationPage()),
               );
               break;
           }
@@ -139,10 +111,7 @@ class SettingsPage extends StatelessWidget {
       actions: const [
         Padding(
           padding: EdgeInsets.only(right: 16),
-          child: Icon(
-            Icons.settings_outlined,
-            color: _textColor,
-          ),
+          child: Icon(Icons.settings_outlined, color: _textColor),
         ),
       ],
       backgroundColor: _backgroundColor,
@@ -155,10 +124,7 @@ class _SettingsItem {
   final IconData icon;
   final String title;
 
-  const _SettingsItem({
-    required this.icon,
-    required this.title,
-  });
+  const _SettingsItem({required this.icon, required this.title});
 }
 
 class _SettingsTile extends StatelessWidget {
@@ -166,11 +132,7 @@ class _SettingsTile extends StatelessWidget {
   final String title;
   final VoidCallback? onTap;
 
-  const _SettingsTile({
-    required this.icon,
-    required this.title,
-    this.onTap,
-  });
+  const _SettingsTile({required this.icon, required this.title, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -183,19 +145,12 @@ class _SettingsTile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 16),
           child: Row(
             children: [
-              Icon(
-                icon,
-                color: Colors.black87,
-                size: 24,
-              ),
+              Icon(icon, color: Colors.black87, size: 24),
               const SizedBox(width: 18),
               Expanded(
                 child: Text(
                   title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.black87,
-                  ),
+                  style: const TextStyle(fontSize: 16, color: Colors.black87),
                 ),
               ),
               const Icon(
